@@ -1,0 +1,15 @@
+pip install kafka-python
+
+import pandas as pd
+from kafka import KafkaProducer
+from time import sleep
+from json import dumps
+import json
+
+
+producer = KafkaProducer(bootstrap_servers=['16.171.148.172:9092'],
+                         value_serializer=lambda x: dump(x).encode('utf-8'))
+
+
+
+producer.send('stock_market_analyis_project', value={'Hello':'World'})
