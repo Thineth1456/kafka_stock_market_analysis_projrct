@@ -1,0 +1,17 @@
+cd kafka_2.13-4.1.1
+export KAFKA_HEAP_OPTS="-Xmx256M -Xms256M"
+rm -rf /tmp/kraft-combined-logs
+KAFKA_CLUSTER_ID=$(bin/kafka-storage.sh random-uuid)
+ bin/kafka-storage.sh format --standalone -t $KAFKA_CLUSTER_ID -c config/server.properties
+ export KAFKA_HEAP_OPTS="-Xmx256M -Xms256M"
+bin/kafka-server-start.sh config/server.properties
+
+//bin/kafka-topics.sh --create --topic stock_market_analyis_project --bootstrap-server //localhost:9092 --partitions 1 --replication-factor 1
+//bin/kafka-topics.sh --list --bootstrap-server :9092
+
+cd kafka_2.13-4.1.1
+bin/kafka-topics.sh --create --topic stock_market_analyis_project01 --bootstrap-server 13.51.166.122:9092 --replication-factor 1 --partitions 1
+bin/kafka-console-producer.sh --topic stock_market_analyis_project --bootstrap-server 13.51.166.122:9092 
+
+cd kafka_2.13-4.1.1
+bin/kafka-console-consumer.sh --topic stock_market_analyis_project --bootstrap-server 13.51.166.122:9092 
